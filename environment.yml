@@ -1,0 +1,16 @@
+name: nasa_combined
+channels:
+  - conda-forge
+dependencies:
+  # Required for full project functionality (dont remove)
+  - pytest
+  # Examples (remove and add as needed)  REMOVED: netcdf4, dask, 
+  - jupyter
+  - jupyterlab
+  - xarray
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - geopandas
+  - rasterio
