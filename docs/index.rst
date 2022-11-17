@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to nasa_combined's documentation!
+Welcome to NASA Combined documentation!
 =======================================
 
 This is an awesome description of nasa_combined, written in `reStructuredText`_.
@@ -17,7 +17,9 @@ In either case, make sure to add an entry in the ``.. toctree::``. Check out ``i
    :maxdepth: 2
 
    new_section
-   new_section_notebook
+   01-read_ROSETTA_radar-matfiles.ipynb
+   02-calc_hydrostatic_ROSETTA.ipynb
+   03-calc_twtt_ROSETTA.ipynb
    api
 
 

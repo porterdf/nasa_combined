@@ -1,3 +1,12 @@
+def calc_twtt(H, c):
+    # PickDepth = -(.5*cIce)*PickTime
+    # SurfDepth = (.5*cAir)*SurfTime
+    
+    twtt = H / (.5 * c )
+    
+    return twtt
+
+
 def read_DICE_matfile(infile):
     from scipy.io import loadmat
     import pandas as pd
@@ -60,4 +69,63 @@ def print_raster(raster):
 #         f"sum: {raster.sum().item()}\n"
         f"CRS: {raster.crs}\n"
     )
+    
+
+def get_custom_cmap(shade=3):
+    import numpy as np
+    from matplotlib.colors import ListedColormap
+
+    cmap = np.zeros([256, 4])
+    cmap[:, shade] = np.linspace(0, 1, 256)
+    cmap = ListedColormap(cmap)
+    
+    return cmap
+
+
+def fix_PROJ_path(postfix='/share/proj'):
+    import pyproj
+    import sys
+
+    projpath = sys.prefix + postfix
+    pyproj.datadir.set_data_dir(projpath)
+
+
+
+def calc_density_average(H_ice,rho_firn=0.7, H_firn=50):
+    '''
+    In meters and kg/m3
+    '''
+    rho_water = 1.025
+    rho_ice = 0.917
+    
+    H_ave = H_ice.mean()
+    rho_ave = (rho_ice * (H_ave - H_firn)/H_ave) + (rho_firn * H_firn/H_ave)
+    
+    return rho_ave
+
+
+def calc_hydrostatic_thickness(freeboard, rho_ave=0.917):
+    rho_water = 1.025
+    
+    # =h_geoid/(1-(rho_ave/1.035))
+    H_hydro = freeboard / (1 - (rho_ave / rho_water))
+    icebase_hydro = freeboard - H_hydro
+    
+    return icebase_hydro
+
+    
+def read_ROSETTA_csv(infile):
+    import pandas as pd
+    
+    ## read into DataFrame
+    df = pd.read_csv(infile)
+    
+    ## New datetime index
+    df.index = pd.to_datetime(df["unixtime"], unit='s')
+    
+    ## Calculate some new variables
+    df.loc[:, 'icebase_dice'] = df.rosetta_lidar - df.thickness_dice
+    
+    return df
+    
     

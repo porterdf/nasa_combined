@@ -7,6 +7,9 @@ from pathlib import Path  # pathlib is seriously awesome!
 cAir = 299792458
 cIce = 1.68e8
 
+SL_lidar_wrtgeo = 51.53
+SL_lidar = 2.71
+
 ## Data paths
 base_dir = Path('/Users/dporter/data')
 data_dir = Path('Antarctic/ROSETTA/radar')
