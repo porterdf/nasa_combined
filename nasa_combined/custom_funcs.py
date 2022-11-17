@@ -1,3 +1,12 @@
+def calc_twtt(H, c):
+    # PickDepth = -(.5*cIce)*PickTime
+    # SurfDepth = (.5*cAir)*SurfTime
+    
+    twtt = H / (.5 * c )
+    
+    return twtt
+
+
 def read_DICE_matfile(infile):
     from scipy.io import loadmat
     import pandas as pd
@@ -60,6 +69,26 @@ def print_raster(raster):
 #         f"sum: {raster.sum().item()}\n"
         f"CRS: {raster.crs}\n"
     )
+    
+
+def get_custom_cmap(shade=3):
+    import numpy as np
+    from matplotlib.colors import ListedColormap
+
+    cmap = np.zeros([256, 4])
+    cmap[:, shade] = np.linspace(0, 1, 256)
+    cmap = ListedColormap(cmap)
+    
+    return cmap
+
+
+def fix_PROJ_path(postfix='/share/proj'):
+    import pyproj
+    import sys
+
+    projpath = sys.prefix + postfix
+    pyproj.datadir.set_data_dir(projpath)
+
 
 
 def calc_density_average(H_ice,rho_firn=0.7, H_firn=50):
@@ -96,8 +125,6 @@ def read_ROSETTA_csv(infile):
     
     ## Calculate some new variables
     df.loc[:, 'icebase_dice'] = df.rosetta_lidar - df.thickness_dice
-    
-
     
     return df
     
