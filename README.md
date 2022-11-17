@@ -8,6 +8,12 @@ nasa_combined
 
 
 Tools for aerogeophyiscal data over ice shelves
+--------
+Primarily OIB and ROSETTA.
+
+[![Image](https://github.com/porterdf/nasa_combined/blob/master/notebooks/figs/mapplot_ROSETTA_ln720_channel.png)](Test_figure)
+
+[![Comparing TWTT calculation](notebooks/figs/lineoplot_TWTT_ln720_comp.png)](Comparing TWTT calculation)
 
 --------
 
